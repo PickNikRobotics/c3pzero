@@ -4,7 +4,7 @@ project(c3pzero_bringup NONE)
 find_package(ament_cmake REQUIRED)
 
 install(
-  DIRECTORY launch param script
+  DIRECTORY launch
   DESTINATION share/${PROJECT_NAME}
 )
 
