@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.22)
 project(c3pzero_ignition CXX)
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-  add_compile_options(-Wall -Wextra -Wpedantic)
+  add_compile_options(-Werror -Wall -Wextra -Wpedantic)
 endif()
 
 # find dependencies
@@ -17,7 +17,7 @@ add_executable(odom2tf_broadcaster
     src/odom2tf_broadcaster_node.cpp
 )
 target_include_directories(odom2tf_broadcaster PUBLIC
-  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<BUILD_INTERFACE:include>
   $<INSTALL_INTERFACE:include>)
 ament_target_dependencies(
   odom2tf_broadcaster
