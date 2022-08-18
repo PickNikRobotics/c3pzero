@@ -1,5 +1,5 @@
 <sdf version="1.6">
-    <world name="empty">
+    <world name="default">
       <physics name="1ms" type="ignored">
         <max_step_size>0.001</max_step_size>
         <real_time_factor>1.0</real_time_factor>
@@ -22,10 +22,16 @@
         name="ignition::gazebo::systems::Contact">
       </plugin>
       <!-- IMU Plugin -->
-      <!-- <plugin
+      <plugin
         filename="libignition-gazebo-imu-system.so"
         name="ignition::gazebo::systems::Imu">
-      </plugin> -->
+      </plugin>
+      <!-- Lidar -->
+      <plugin
+        filename="libignition-gazebo-sensors-system.so"
+        name="ignition::gazebo::systems::Sensors">
+        <render_engine>ogre2</render_engine>
+      </plugin>
 
       <light type="directional" name="sun">
         <cast_shadows>false</cast_shadows>

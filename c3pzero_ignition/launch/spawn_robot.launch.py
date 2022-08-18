@@ -22,14 +22,10 @@ from launch.conditions import IfCondition
 def launch_setup(context, *args, **kwargs):
 
     # Configure launch arguments
-    # world = LaunchConfiguration("world")
-    # robot = LaunchConfiguration("robot")
     simulation = LaunchConfiguration("simulation")
     rviz = LaunchConfiguration("rviz")
 
     # Configure some helper variables and paths
-    # world_name = world.perform(context)
-    # robot_name = robot.perform(context)
     pkg_robot_description = get_package_share_directory("c3pzero_description")
     pkg_robot_ignition = get_package_share_directory("c3pzero_ignition")
 
@@ -79,7 +75,7 @@ def launch_setup(context, *args, **kwargs):
     )
 
     # IMU Sensor Static Tf
-    imu_static_tf = Node(
+    imu_static_tf_node = Node(
         package="tf2_ros",
         executable="static_transform_publisher",
         name="imu_static_transform_publisher",
@@ -92,33 +88,59 @@ def launch_setup(context, *args, **kwargs):
             "0.0",
             "0.0",
             "base_link",
-            "robot/imu_link/imu",
+            "robot/base_link/imu",
         ],
     )
 
-    bridge = Node(
+    lidar_static_tf_node = Node(
+        package="tf2_ros",
+        executable="static_transform_publisher",
+        name="imu_static_transform_publisher",
+        output="log",
+        arguments=[
+            "0.0",
+            "0.0",
+            "0.0",
+            "0.0",
+            "0.0",
+            "0.0",
+            "lidar_link",
+            "robot/base_link/lidar",
+        ],
+    )
+
+    ign_ros_bridge_node = Node(
         package="ros_ign_bridge",
         executable="parameter_bridge",
         arguments=[
-            # JointTrajectory bridge (ROS2 -> IGN)
-            "/joint_trajectory_controller/joint_trajectory@trajectory_msgs/msg/JointTrajectory]ignition.msgs.JointTrajectory",
-            # Wheel Joint Trajectory bridge (ROS2 -> IGN)
-            "/velocity_controller/joint_trajectory@trajectory_msgs/msg/JointTrajectory]ignition.msgs.JointTrajectory",
+            # cmd_vel bridge (ROS2 -> IGN)
+            '/cmd_vel@geometry_msgs/msg/Twist]ignition.msgs.Twist',
             # Clock (IGN -> ROS2)
             "/clock@rosgraph_msgs/msg/Clock[ignition.msgs.Clock",
-            # JointTrajectoryProgress bridge (IGN -> ROS2)
-            "/joint_trajectory_controller/joint_trajectory_progress@std_msgs/msg/Float32[ignition.msgs.Float",
-            # Wheel JointTrajectory Progress bridge (IGN -> ROS2)
-            "/velocity_controller/joint_trajectory_progress@std_msgs/msg/Float32[ignition.msgs.Float",
+            # Lidar (IGN -> ROS2)
+            '/scan@sensor_msgs/msg/LaserScan[ignition.msgs.LaserScan',
+            '/scan/points@sensor_msgs/msg/PointCloud2[ignition.msgs.PointCloudPacked',
+            # Joint states (IGN -> ROS2)
+            '/world/default/model/robot/joint_state@sensor_msgs/msg/JointState[ignition.msgs.Model',
             # IMU (IGN -> ROS2)
             "/imu@sensor_msgs/msg/Imu[ignition.msgs.IMU",
-            # Odometry (IGN -> ROS2)
+            # Ground Truth Odometry (IGN -> ROS2)
             "/odom@nav_msgs/msg/Odometry[ignition.msgs.Odometry",
+            # Wheel Odometry (IGN -> ROS2)
+            "/wheel/odom@nav_msgs/msg/Odometry[ignition.msgs.Odometry",
         ],
         remappings=[
-            # ("/world/" + world_name + "/model/robot/joint_state", "joint_states"),
+            ("/world/default/model/robot/joint_state", "joint_states"),
             ("/imu", "imu/data"),
         ],
+        output="screen",
+    )
+
+    # Broadcast tf from odom
+    tf_broadcaster_node = Node(
+        package="c3pzero_ignition",
+        executable="odom2tf_broadcaster",
+        name="odom2tf_broadcaster",
         output="screen",
     )
 
@@ -142,20 +164,6 @@ def launch_setup(context, *args, **kwargs):
         parameters=[robot_description, ros2_controllers_path],
         output="both",
     )
-
-    # Load controllers
-    load_controllers = []
-    for controller in [
-        "diff_drive_controller",
-        "joint_state_broadcaster",
-    ]:
-        load_controllers += [
-            ExecuteProcess(
-                cmd=["ros2 run controller_manager spawner {}".format(controller)],
-                shell=True,
-                output="screen",
-            )
-        ]
 
     joint_state_broadcaster_spawner = Node(
         package="controller_manager",
@@ -184,16 +192,19 @@ def launch_setup(context, *args, **kwargs):
     nodes_and_launches = [
         robot_state_publisher_node,
         spawn_node,
-        ros2_control_node,
-        joint_state_broadcaster_spawner,
-        diff_drive_controller_spawner,
+        # Uncomment ros2 control spawners and comment bridge and tfs, when it gets working
+        # ros2_control_node,
+        # joint_state_broadcaster_spawner,
+        # diff_drive_controller_spawner,
         # delay_rviz_after_joint_state_broadcaster_spawner,
-        # rviz_node,
-        # imu_static_tf,
-        # bridge,
+        rviz_node,
+        imu_static_tf_node,
+        tf_broadcaster_node,
+        ign_ros_bridge_node,
+        lidar_static_tf_node
     ]
 
-    return nodes_and_launches  # + load_controllers
+    return nodes_and_launches
 
 
 def generate_launch_description():
@@ -211,8 +222,6 @@ def generate_launch_description():
     )
     declared_arguments.append(simulation_arg)
     declared_arguments.append(rviz_arg)
-    # declared_arguments.append(launch_helper.DeclareWorldArg())
-    # declared_arguments.append(launch_helper.DeclareRobotArg())
 
     return LaunchDescription(
         declared_arguments + [OpaqueFunction(function=launch_setup)]
