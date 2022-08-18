@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>c3pzero_bringup</name>
+  <version>0.0.1</version>
+  <description>
+    ROS 2 launch scripts for starting the c3pzero_bringup
+  </description>
+  <maintainer email="abake48@gmail.com">Anthony Baker</maintainer>
+  <license>BSD</license>
+  <url type="website">https://github.com/PickNikRobotics/c3pzero_siteconfig</url>
+  <url type="repository">https://github.com/PickNikRobotics/c3pzero_siteconfig</url>
+  <url type="bugtracker">https://github.com/PickNikRobotics/c3pzero_siteconfig/issues</url>
+  <author email="abake48@gmail.com">Anthony Baker</author>
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
