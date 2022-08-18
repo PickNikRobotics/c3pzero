@@ -1,10 +1,5 @@
 cmake_minimum_required(VERSION 3.22)
-project(c3pzero_ignition)
-
-# Default to C++17
-if(NOT CMAKE_CXX_STANDARD)
-  set(CMAKE_CXX_STANDARD 17)
-endif()
+project(c3pzero_ignition CXX)
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
@@ -32,6 +27,7 @@ ament_target_dependencies(
     tf2
     tf2_ros
 )
+target_compile_features(odom2tf_broadcaster PRIVATE cxx_std_17)
 
 # Install executable
 install(TARGETS odom2tf_broadcaster DESTINATION lib/${PROJECT_NAME})

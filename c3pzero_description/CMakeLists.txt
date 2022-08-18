@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.22)
-project(c3pzero_description)
+project(c3pzero_description NONE)
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
