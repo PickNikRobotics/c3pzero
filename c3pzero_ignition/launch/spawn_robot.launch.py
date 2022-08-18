@@ -5,8 +5,6 @@ from launch_ros.actions import Node
 from launch.actions import (
     OpaqueFunction,
     DeclareLaunchArgument,
-    RegisterEventHandler,
-    ExecuteProcess
 )
 from launch.substitutions import (
     Command,
@@ -153,50 +151,9 @@ def launch_setup(context, *args, **kwargs):
         condition=IfCondition(rviz),
     )
 
-    ros2_controllers_path = os.path.join(
-        pkg_robot_description,
-        "config",
-        "c3pzero_controllers.yaml",
-    )
-    ros2_control_node = Node(
-        package="controller_manager",
-        executable="ros2_control_node",
-        parameters=[robot_description, ros2_controllers_path],
-        output="both",
-    )
-
-    joint_state_broadcaster_spawner = Node(
-        package="controller_manager",
-        executable="spawner",
-        arguments=[
-            "joint_state_broadcaster",
-            "--controller-manager",
-            "/controller_manager",
-        ],
-    )
-
-    # Delay rviz start after `joint_state_broadcaster`
-    delay_rviz_after_joint_state_broadcaster_spawner = RegisterEventHandler(
-        event_handler=OnProcessExit(
-            target_action=joint_state_broadcaster_spawner,
-            on_exit=[rviz_node],
-        )
-    )
-
-    diff_drive_controller_spawner = Node(
-        package="controller_manager",
-        executable="spawner",
-        arguments=["diff_drive_controller", "-c", "/controller_manager"],
-    )
-
     nodes_and_launches = [
         robot_state_publisher_node,
         spawn_node,
-        # Uncomment ros2 control spawners and comment bridge and tfs, when it gets working
-        # ros2_control_node,
-        # joint_state_broadcaster_spawner,
-        # diff_drive_controller_spawner,
-        # delay_rviz_after_joint_state_broadcaster_spawner,
         rviz_node,
         imu_static_tf_node,
         tf_broadcaster_node,

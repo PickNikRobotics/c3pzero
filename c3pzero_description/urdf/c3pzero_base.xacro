@@ -251,16 +251,6 @@
     <origin xyz="0 0 0.19" rpy="0 0 0"/>
   </joint>
 
-  <!-- ros2 control -->
-  <!-- TODO Uncomment when gz_ros2_control is working -->
-  <!-- <xacro:include filename="$(find c3pzero_description)/urdf/c3pzero_base.ros2_control.xacro" />
-  <xacro:if value="${simulation}">
-    <xacro:property name="ros2_control_name" value="IgnitionSystem"/>
-    <xacro:c3pzero_ros2_control
-      name="${ros2_control_name}"
-      simulation="${simulation}"/>
-  </xacro:if> -->
-
   <xacro:if value="$(arg simulation)">
     <gazebo reference="lidar_link">
       <!-- Lidar Sensor -->
@@ -373,12 +363,6 @@
           <odom_topic>/wheel/odom</odom_topic>
         </plugin>
 
-        <!-- TODO Uncomment when gz_ros2_control is working -->
-        <!-- <plugin filename="libign_ros2_control-system.so" name="ign_ros2_control">
-          <robot_param>robot_description</robot_param>
-          <robot_param_node>robot_state_publisher</robot_param_node>
-          <parameters>$(find c3pzero_description)/config/c3pzero_controllers.yaml</parameters>
-        </plugin> -->
     </gazebo>
   </xacro:if>
 

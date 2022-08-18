@@ -4,8 +4,8 @@
   <name>c3pzero_description</name>
   <version>1.0.0</version>
   <description>URDF for c3pzero</description>
-  <maintainer email="griswald.brooks@picknik.ai">Griswald Brooks</maintainer>
-  <license>BSD</license>
+  <maintainer email="vatan@picknik.ai">Vatan Aksoy Tezer</maintainer>
+  <license>Unlicense</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
