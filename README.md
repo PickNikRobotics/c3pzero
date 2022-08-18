@@ -16,6 +16,11 @@ Build the repository in the container
 username@c3pzero_siteconfig-dev:~/ws$ colcon build
 ```
 
+Linting
+```shell
+username@c3pzero_siteconfig-dev:~/ws$ pre-commit run -a
+```
+
 # Requirements
 - docker compose 2.6.0
   - https://docs.docker.com/compose/install/compose-plugin/#install-the-plugin-manually
