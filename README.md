@@ -17,7 +17,7 @@ username@c3pzero_siteconfig-dev:~/ws$ colcon build
 ```
 
 # Requirements
-- docker compose 2.7.0
+- docker compose 2.6.0
   - https://docs.docker.com/compose/install/compose-plugin/#install-the-plugin-manually
 
 ## References
