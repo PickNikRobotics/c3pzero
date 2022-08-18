@@ -17,7 +17,7 @@ add_executable(odom2tf_broadcaster
     src/odom2tf_broadcaster_node.cpp
 )
 target_include_directories(odom2tf_broadcaster PUBLIC
-  $<BUILD_INTERFACE:include>
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>)
 ament_target_dependencies(
   odom2tf_broadcaster
