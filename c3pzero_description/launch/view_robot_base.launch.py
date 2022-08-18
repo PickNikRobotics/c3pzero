@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Copyright 2021 PickNik Inc.
 # All rights reserved.
 #
@@ -9,13 +10,12 @@ from launch.substitutions import Command, LaunchConfiguration
 import launch_ros
 import os
 
+
 def generate_launch_description():
     pkg_share = launch_ros.substitutions.FindPackageShare(
         package="c3pzero_description"
     ).find("c3pzero_description")
-    default_model_path = os.path.join(
-        pkg_share, "urdf/c3pzero_base.xacro"
-    )
+    default_model_path = os.path.join(pkg_share, "urdf/c3pzero_base.xacro")
     default_rviz_config_path = os.path.join(pkg_share, "rviz/view_robot_base.rviz")
 
     robot_state_publisher_node = launch_ros.actions.Node(

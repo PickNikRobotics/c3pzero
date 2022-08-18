@@ -14,7 +14,7 @@ using std::placeholders::_1;
 struct Odom2TfBroadcaster : public rclcpp::Node
 {
   Odom2TfBroadcaster()
-  : Node("odom2tf_broadcaster"), 
+  : Node("odom2tf_broadcaster"),
     tf_broadcaster_{std::make_shared<tf2_ros::TransformBroadcaster>(shared_from_this())},
     subscription_{this->create_subscription<nav_msgs::msg::Odometry>(
         "odom", 10, [this](nav_msgs::msg::Odometry::ConstSharedPtr msg){

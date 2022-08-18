@@ -1,10 +1,11 @@
+# -*- coding: utf-8 -*-
 import os
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import (
     IncludeLaunchDescription,
     OpaqueFunction,
-    DeclareLaunchArgument
+    DeclareLaunchArgument,
 )
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
@@ -39,7 +40,7 @@ def launch_setup(context, *args, **kwargs):
 
 def generate_launch_description():
     declared_arguments = []
-    world_arg =  DeclareLaunchArgument(
+    world_arg = DeclareLaunchArgument(
         "world",
         description="Name of world to display",
         choices=[
@@ -47,10 +48,10 @@ def generate_launch_description():
         ],
         default_value="empty",
     )
-    headless_arg =  DeclareLaunchArgument(
+    headless_arg = DeclareLaunchArgument(
         "headless",
         description="If true, launch the simulation without UI",
-        default_value="false"
+        default_value="false",
     )
     declared_arguments.append(world_arg)
     declared_arguments.append(headless_arg)

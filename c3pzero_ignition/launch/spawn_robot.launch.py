@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import os
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
@@ -16,7 +17,6 @@ from launch.event_handlers import OnProcessExit
 from launch.conditions import IfCondition
 
 
-
 def launch_setup(context, *args, **kwargs):
 
     # Configure launch arguments
@@ -33,7 +33,7 @@ def launch_setup(context, *args, **kwargs):
 
     # Parse xacro and publish robot state
     robot_description_path = os.path.join(
-        pkg_robot_description, "urdf",  "c3pzero_base.xacro"
+        pkg_robot_description, "urdf", "c3pzero_base.xacro"
     )
 
     robot_description_content = Command(
@@ -112,14 +112,14 @@ def launch_setup(context, *args, **kwargs):
         executable="parameter_bridge",
         arguments=[
             # cmd_vel bridge (ROS2 -> IGN)
-            '/cmd_vel@geometry_msgs/msg/Twist]ignition.msgs.Twist',
+            "/cmd_vel@geometry_msgs/msg/Twist]ignition.msgs.Twist",
             # Clock (IGN -> ROS2)
             "/clock@rosgraph_msgs/msg/Clock[ignition.msgs.Clock",
             # Lidar (IGN -> ROS2)
-            '/scan@sensor_msgs/msg/LaserScan[ignition.msgs.LaserScan',
-            '/scan/points@sensor_msgs/msg/PointCloud2[ignition.msgs.PointCloudPacked',
+            "/scan@sensor_msgs/msg/LaserScan[ignition.msgs.LaserScan",
+            "/scan/points@sensor_msgs/msg/PointCloud2[ignition.msgs.PointCloudPacked",
             # Joint states (IGN -> ROS2)
-            '/world/default/model/robot/joint_state@sensor_msgs/msg/JointState[ignition.msgs.Model',
+            "/world/default/model/robot/joint_state@sensor_msgs/msg/JointState[ignition.msgs.Model",
             # IMU (IGN -> ROS2)
             "/imu@sensor_msgs/msg/Imu[ignition.msgs.IMU",
             # Ground Truth Odometry (IGN -> ROS2)
@@ -158,7 +158,7 @@ def launch_setup(context, *args, **kwargs):
         imu_static_tf_node,
         tf_broadcaster_node,
         ign_ros_bridge_node,
-        lidar_static_tf_node
+        lidar_static_tf_node,
     ]
 
     return nodes_and_launches
@@ -167,15 +167,13 @@ def launch_setup(context, *args, **kwargs):
 def generate_launch_description():
 
     declared_arguments = []
-    simulation_arg =  DeclareLaunchArgument(
+    simulation_arg = DeclareLaunchArgument(
         "simulation",
         description="If true, enable simulated parameters in urdf",
-        default_value="true"
+        default_value="true",
     )
-    rviz_arg =  DeclareLaunchArgument(
-        "rviz",
-        description="If true, launch rviz",
-        default_value="false"
+    rviz_arg = DeclareLaunchArgument(
+        "rviz", description="If true, launch rviz", default_value="false"
     )
     declared_arguments.append(simulation_arg)
     declared_arguments.append(rviz_arg)
