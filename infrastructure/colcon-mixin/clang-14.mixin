@@ -1,0 +1,10 @@
+{
+    "build": {
+        "clang-14": {
+            "cmake-args": [
+                "-DCMAKE_C_COMPILER=clang-14",
+                "-DCMAKE_CXX_COMPILER=clang++-14",
+            ]
+        }
+    }
+}
