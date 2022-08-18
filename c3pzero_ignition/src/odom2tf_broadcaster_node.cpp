@@ -18,13 +18,12 @@ public:
   {
     subscription_ = this->create_subscription<nav_msgs::msg::Odometry>(
         "odom", 10, std::bind(&Odom2TfBroadcaster::topic_callback, this, _1));
+    tf_broadcaster_ = std::make_shared<tf2_ros::TransformBroadcaster>(shared_from_this());
   }
 
 private:
   void topic_callback(const nav_msgs::msg::Odometry::SharedPtr msg)
   {
-    tf_broadcaster_ = std::make_shared<tf2_ros::TransformBroadcaster>(shared_from_this());
-
     transform_stamped_.header = msg->header;
     transform_stamped_.child_frame_id = msg->child_frame_id;
     transform_stamped_.transform.translation.x = msg->pose.pose.position.x;
