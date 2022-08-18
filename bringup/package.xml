@@ -6,7 +6,7 @@
     ROS 2 launch scripts for starting the c3pzero_bringup
   </description>
   <maintainer email="abake48@gmail.com">Anthony Baker</maintainer>
-  <license>BSD</license>
+  <license>Unlicense</license>
   <url type="website">https://github.com/PickNikRobotics/c3pzero_siteconfig</url>
   <url type="repository">https://github.com/PickNikRobotics/c3pzero_siteconfig</url>
   <url type="bugtracker">https://github.com/PickNikRobotics/c3pzero_siteconfig/issues</url>

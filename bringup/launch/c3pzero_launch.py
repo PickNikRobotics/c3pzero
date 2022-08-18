@@ -5,7 +5,7 @@ def generate_launch_description():
     return LaunchDescription([
         Node(
             package='cp3zero_node',
-            executable='cp3zero_exec',
+            executable='cp3zero_node',
             parameters=[],
             arguments=[],
             output='screen')
