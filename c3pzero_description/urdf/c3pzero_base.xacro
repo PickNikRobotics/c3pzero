@@ -252,21 +252,23 @@
   </joint>
 
   <!-- ros2 control -->
-  <xacro:include filename="$(find c3pzero_description)/urdf/c3pzero_base.ros2_control.xacro" />
+  <!-- TODO Uncomment when gz_ros2_control is working -->
+  <!-- <xacro:include filename="$(find c3pzero_description)/urdf/c3pzero_base.ros2_control.xacro" />
   <xacro:if value="${simulation}">
     <xacro:property name="ros2_control_name" value="IgnitionSystem"/>
     <xacro:c3pzero_ros2_control
       name="${ros2_control_name}"
       simulation="${simulation}"/>
-  </xacro:if>
+  </xacro:if> -->
 
-  <xacro:if value="${simulation}">
+  <xacro:if value="$(arg simulation)">
     <gazebo reference="lidar_link">
       <!-- Lidar Sensor -->
       <sensor name="lidar" type="gpu_lidar">
         <update_rate>5</update_rate>
         <visualize>true</visualize>
         <always_on>true</always_on>
+        <topic>scan</topic>
         <lidar>
           <scan>
             <horizontal>
@@ -289,21 +291,94 @@
           </range>
         </lidar>
       </sensor>
+    </gazebo>
 
-      <!-- Ground Truth Odometry Publisher -->
-      <plugin filename="ignition-gazebo-odometry-publisher-system" name="ignition::gazebo::systems::OdometryPublisher">
-        <odom_publish_frequency>50</odom_publish_frequency>
-        <odom_topic>/odom</odom_topic>
-        <odom_frame>odom</odom_frame>
-        <robot_base_frame>base_link</robot_base_frame>
-        <dimensions>3</dimensions>
-      </plugin>
+    <gazebo reference="base_link">
+      <!-- Base IMU (Accel + Gyro) -->
+      <sensor name="imu" type="imu">
+        <always_on>1</always_on>
+        <update_rate>25</update_rate>
+        <visualize>false</visualize>
+        <topic>imu</topic>
+        <imu>
+          <!-- 0.0625/2000 -->
+          <angular_velocity>
+            <x>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>0.00003125</stddev>
+              </noise>
+            </x>
+            <y>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>0.00003125</stddev>
+              </noise>
+            </y>
+            <z>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>0.00003125</stddev>
+              </noise>
+            </z>
+          </angular_velocity>
+          <!-- 20/2000 noise -->
+          <linear_acceleration>
+            <x>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>0.01</stddev>
+              </noise>
+            </x>
+            <y>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>0.01</stddev>
+              </noise>
+            </y>
+            <z>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>0.01</stddev>
+              </noise>
+            </z>
+          </linear_acceleration>
+        </imu>
+      </sensor>
+    </gazebo>
 
-      <plugin filename="libign_ros2_control-system.so" name="ign_ros2_control">
-        <robot_param>robot_description</robot_param>
-        <robot_param_node>robot_state_publisher</robot_param_node>
-        <parameters>$(find c3pzero_description)/config/c3pzero_controllers.yaml</parameters>
-      </plugin>
+    <gazebo>
+        <!-- Ground Truth Odometry Publisher -->
+        <plugin filename="ignition-gazebo-odometry-publisher-system" name="ignition::gazebo::systems::OdometryPublisher">
+          <odom_publish_frequency>50</odom_publish_frequency>
+          <odom_topic>/odom</odom_topic>
+          <odom_frame>odom</odom_frame>
+          <robot_base_frame>base_link</robot_base_frame>
+          <dimensions>3</dimensions>
+        </plugin>
+
+        <!-- Joint States -->
+        <plugin filename="libignition-gazebo-joint-state-publisher-system.so" name="ignition::gazebo::systems::JointStatePublisher"/>
+
+        <!-- Diff Drive -->
+        <plugin filename="libignition-gazebo-diff-drive-system.so" name="ignition::gazebo::systems::DiffDrive">
+          <left_joint>drivewhl_l_joint</left_joint>
+          <right_joint>drivewhl_r_joint</right_joint>
+          <wheel_separation>0.54</wheel_separation>
+          <wheel_radius>0.1716</wheel_radius>
+          <odom_publish_frequency>10</odom_publish_frequency>
+          <topic>cmd_vel</topic>
+          <frame_id>wheel_odom</frame_id>
+          <child_frame_id>base_link</child_frame_id>
+          <odom_topic>/wheel/odom</odom_topic>
+        </plugin>
+
+        <!-- TODO Uncomment when gz_ros2_control is working -->
+        <!-- <plugin filename="libign_ros2_control-system.so" name="ign_ros2_control">
+          <robot_param>robot_description</robot_param>
+          <robot_param_node>robot_state_publisher</robot_param_node>
+          <parameters>$(find c3pzero_description)/config/c3pzero_controllers.yaml</parameters>
+        </plugin> -->
     </gazebo>
   </xacro:if>
 

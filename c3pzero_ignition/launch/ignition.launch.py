@@ -18,7 +18,7 @@ def launch_setup(context, *args, **kwargs):
     # Ignition Gazebo
     pkg_ros_ign_gazebo = get_package_share_directory("ros_ign_gazebo")
     pkg_c3pzero_ignition = get_package_share_directory("c3pzero_ignition")
-    world_str = "-r " + os.path.join(
+    world_str = "-v 3 -r " + os.path.join(
         pkg_c3pzero_ignition, "worlds", world.perform(context) + "_world.sdf"
     )
 
