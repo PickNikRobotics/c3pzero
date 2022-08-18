@@ -2,10 +2,10 @@
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
   <name>c3pzero_ignition</name>
-  <version>1.0.0</version>
+  <version>0.1.0</version>
   <description>Ignition worlds, models and launch files for c3pzero robot</description>
   <maintainer email="vatan@picknik.ai">tezer</maintainer>
-  <license>Proprietary</license>
+  <license>Unlicense</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
