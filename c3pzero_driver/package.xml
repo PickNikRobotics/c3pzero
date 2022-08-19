@@ -5,12 +5,15 @@
   <version>0.0.0</version>
   <description>TODO: Package description</description>
   <maintainer email="marq.razz@gmail.com">Marq Rasmussen</maintainer>
-  <license>TODO: License declaration</license>
+  <license>Unlicence</license>
 
-  <exec_depend>rclpy</exec_depend>
   <exec_depend>geometry_msgs</exec_depend>
+  <exec_depend>nav_msgs</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>rclpy</exec_depend>
   <exec_depend>python3-serial</exec_depend>
   <exec_depend>tf_transformations</exec_depend>
+  <exec_depend>tf2_ros</exec_depend>
 
   <test_depend>ament_copyright</test_depend>
   <test_depend>ament_flake8</test_depend>
