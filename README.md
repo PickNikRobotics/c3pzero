@@ -24,5 +24,11 @@ username@c3pzero_siteconfig-dev:~/ws$ pre-commit run -a
 - docker compose 2.6.0
   - https://docs.docker.com/compose/install/compose-plugin/#install-the-plugin-manually
 
+# Packages
+
+We currently have the following packages, please refer to their individual README files for launch files and more information:
+
+ - [c3pzero_navigation](c3pzero_navigation/README.md)
+
 ## References
 - [Development container documentation](docs/development-container.md)
