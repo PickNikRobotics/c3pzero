@@ -5,7 +5,7 @@ project(c3pzero_navigation NONE)
 find_package(ament_cmake REQUIRED)
 
 install(
-  DIRECTORY params
+  DIRECTORY launch params rviz map
   DESTINATION share/${PROJECT_NAME}
 )
 
