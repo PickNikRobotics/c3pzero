@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <robot name="c3pzero" xmlns:xacro="http://ros.org/wiki/xacro">
 
-  <xacro:property name="simulation" default="true" />
+  <xacro:arg name="simulation" default="true" />
 
   <!-- Define robot constants -->
   <xacro:property name="base_width" value="0.46"/>
