@@ -89,4 +89,4 @@ objectives:
   waypoints_file:
     package_name: "c3pzero_base_config"
     relative_path: "waypoints/waypoints.yaml"
-    
+

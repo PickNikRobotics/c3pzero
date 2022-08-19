@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 
 # Copyright 2021 PickNik Inc.
 # All rights reserved.
@@ -9,6 +10,7 @@
 from launch import LaunchDescription
 from launch.actions import IncludeLaunchDescription
 from launch_ros.actions import Node
+
 
 def generate_launch_description():
     nodes_to_start = []
