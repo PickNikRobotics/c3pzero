@@ -66,7 +66,7 @@ def generate_launch_description():
     declare_map_yaml_cmd = DeclareLaunchArgument(
         'map',
         default_value=os.path.join(
-            c3pzero_nav_dir, 'map', 'empty_world.yaml'),
+            c3pzero_nav_dir, 'map', 'house.yaml'),
         description='Full path to map file to load')
 
     declare_use_sim_time_cmd = DeclareLaunchArgument(
