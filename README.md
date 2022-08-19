@@ -4,7 +4,6 @@ MoveIt Studio Site Configuration for navigation with c3pzero mobile base
 # Build
 Build a new development image
 ```shell
-mkdir -p ~/.c3pzero_siteconfig/ccache
 export UIDGID=$(id -u):$(id -g); docker compose -f compose.dev.yml build --ssh default
 ```
 Start an interactive development container
@@ -31,7 +30,7 @@ We currently have the following packages, please refer to their individual READM
 
 - [c3pzero_description](c3pzero_description/README.md)
 - [c3pzero_ignition](c3pzero_ignition/README.md)
-
+- [c3pzero_navigation](c3pzero_navigation/README.md)
 
 ## References
 - [Development container documentation](docs/development-container.md)
