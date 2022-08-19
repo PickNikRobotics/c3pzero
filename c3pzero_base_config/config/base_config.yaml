@@ -5,15 +5,11 @@
 ###############################################################
 
 hardware:
-  # Used by the ur_description package to set kinematics and geometry for a specific robot type.
-  type: "c3pzero"
-  simulated: True
-
   # The robot's IP address
   ip: "!!! Please set the IP address of the robot"
 
   # launch files
-  view_robot_base_launch_file:
+  robot_driver_persist_launch_file:
     package: "c3pzero_description"
     path: "launch/view_robot_base.launch.py"
 
