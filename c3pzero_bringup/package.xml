@@ -16,6 +16,7 @@
   <depend>c3pzero_description</depend>
   <depend>c3pzero_ignition</depend>
   <depend>c3pzero_navigation</depend>
+  <depend>hls_lfcd_lds_driver</depend>
 
   <export>
     <build_type>ament_cmake</build_type>

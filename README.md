@@ -15,6 +15,15 @@ Build the repository in the container
 username@c3pzero_siteconfig-dev:~/ws$ colcon build
 ```
 
+Make sure to run these commands before trying to communicate with robot.
+
+```
+sudo chmod 666 /dev/ttyUSB0
+sudo chown $USER /dev/ttyUSB0
+sudo adduser $USER dialout
+```
+
+
 Linting
 ```shell
 username@c3pzero_siteconfig-dev:~/ws$ pre-commit run -a
