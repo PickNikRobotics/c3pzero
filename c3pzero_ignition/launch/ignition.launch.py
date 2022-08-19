@@ -43,12 +43,7 @@ def generate_launch_description():
     world_arg = DeclareLaunchArgument(
         "world",
         description="Name of world to display",
-        choices=[
-            "empty",
-            "simple",
-            "warehouse",
-            "house"
-        ],
+        choices=["empty", "simple", "warehouse", "house"],
         default_value="empty",
     )
     headless_arg = DeclareLaunchArgument(
