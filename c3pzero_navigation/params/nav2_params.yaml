@@ -175,11 +175,11 @@ local_costmap:
       robot_base_frame: base_link
       use_sim_time: True
       rolling_window: true
-      width: 3
-      height: 3
+      width: 5
+      height: 5
       resolution: 0.05
       # Can either use the robot_radius or footprint parameter
-      footprint: "[ [0.21, 0.195], [0.21, -0.195], [-0.21, -0.195], [-0.21, 0.195] ]"  
+      footprint: "[ [0.45, 0.295], [0.45, -0.295], [-0.45, -0.295], [-0.45, 0.295] ]"  
       plugins: ["voxel_layer", "inflation_layer"]
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
@@ -213,6 +213,8 @@ local_costmap:
 global_costmap:
   global_costmap:
     ros__parameters:
+      width: 100
+      height: 100
       update_frequency: 1.0
       publish_frequency: 1.0
       global_frame: map
@@ -232,9 +234,9 @@ global_costmap:
           clearing: True
           marking: True
           data_type: "LaserScan"
-          raytrace_max_range: 3.0
+          raytrace_max_range: 20.0
           raytrace_min_range: 0.0
-          obstacle_max_range: 2.5
+          obstacle_max_range: 20.0
           obstacle_min_range: 0.0
       static_layer:
         plugin: "nav2_costmap_2d::StaticLayer"
@@ -248,7 +250,7 @@ global_costmap:
 map_server:
   ros__parameters:
     use_sim_time: True
-    yaml_filename: "turtlebot3_world.yaml" # Change what map to use
+    yaml_filename: "house.yaml" # Change what map to use
 
 map_saver:
   ros__parameters:
