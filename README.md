@@ -45,6 +45,7 @@ We currently have the following packages, please refer to their individual READM
 - [c3pzero_description](c3pzero_description/README.md)
 - [c3pzero_ignition](c3pzero_ignition/README.md)
 - [c3pzero_navigation](c3pzero_navigation/README.md)
+- [c3pzero_bringup](c3pzero_bringup/README.md)
 
 ## References
 - [Development container documentation](docs/development-container.md)
