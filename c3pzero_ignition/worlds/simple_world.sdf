@@ -83,12 +83,6 @@
     </model>
 
     <include>
-      <static>false</static>
-      <uri>model://can</uri>
-      <pose>-0.025 -0.6 1.0 0 0 0</pose>
-    </include>
-
-    <include>
       <name>table_start</name>
       <static>true</static>
       <pose>0 -0.9 0 0 0 0</pose>
