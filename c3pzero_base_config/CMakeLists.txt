@@ -4,7 +4,7 @@ project(c3pzero_base_config NONE)
 find_package(ament_cmake REQUIRED)
 
 install(
-  DIRECTORY config
+  DIRECTORY config launch objectives waypoints
   DESTINATION share/${PROJECT_NAME}
 )
 

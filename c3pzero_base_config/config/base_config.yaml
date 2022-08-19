@@ -45,6 +45,11 @@ hardware:
     urdf:
       package: "c3pzero_description"
       path: "urdf/c3pzero_base.xacro"
+    srdf:
+      package: "picknik_kinova_gen3_base_config"
+      path: "config/moveit/picknik_kinova_gen3_base.srdf"
+    urdf_params:
+      - simulation: True
 
 ros_global_params:
   use_sim_time: "%>> hardware.simulated"
@@ -77,6 +82,34 @@ moveit_params:
     allowed_execution_duration_scaling: 2.0
     allowed_goal_duration_margin: 5.0
     allowed_start_tolerance: 0.01
+
+optional_feature_params:
+  use_joystick: False
+  use_external_webcam: False
+  use_formant_bridge: False
+
+ros2_control:
+  config:
+    package: "picknik_kinova_gen3_base_config"
+    path: "config/control/picknik_kinova_gen3.ros2_control.yaml"
+  # Load and start these controllers so they can be used immediately.
+  controllers_active_at_startup:
+    - "robotiq_gripper_controller"
+    - "joint_state_broadcaster"
+    - "joint_trajectory_controller"
+  # TODO: Need the ability to enable empty list of inactive controllers at startup
+  # Load but do not start these controllers so they can be activated later if needed.
+  controllers_inactive_at_startup:
+    - "streaming_controller" # this controller is currently not able to run at the same time as joint_trajectory_controller and is currently disabled in picknik_kinova_gen3.ros2_control.yaml
+  # Prevent the Agent's controller pause functionality from stopping these controllers.
+  controllers_not_managed:
+    - "joint_state_broadcaster"
+
+# Octomap manager configuration parameters
+octomap_manager:
+  # Input point cloud topic name. The *output* point cloud topic published by
+  # the Octomap manager node is defined in sensors_3d.yaml.
+  input_point_cloud_topic: "/wrist_mounted_camera/depth/color/points"
 
 objectives:
   behavior_loader_plugins:
