@@ -12,6 +12,11 @@
   <url type="bugtracker">https://github.com/PickNikRobotics/c3pzero_siteconfig/issues</url>
   <author email="abake48@gmail.com">Anthony Baker</author>
   <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <depend>c3pzero_description</depend>
+  <depend>c3pzero_ignition</depend>
+  <depend>c3pzero_navigation</depend>
+
   <export>
     <build_type>ament_cmake</build_type>
   </export>
