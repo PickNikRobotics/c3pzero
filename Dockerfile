@@ -31,6 +31,7 @@ RUN apt update \
         vim \
         wget \
         ssh-client \
+        software-properties-common \
     && rm -rf /var/lib/apt/lists/*
 
 # install some pip packages needed for testing
