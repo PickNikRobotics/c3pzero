@@ -31,6 +31,7 @@ RUN apt update \
         vim \
         wget \
         ssh-client \
+        software-properties-common \
     && rm -rf /var/lib/apt/lists/*
 
 # install some pip packages needed for testing
@@ -52,6 +53,7 @@ RUN --mount=type=ssh \
     mkdir src \
     && git clone --single-branch --branch hackathon/remove-protobuf-requirement \
         git@github.com:PickNikRobotics/moveit_studio.git src/moveit_studio \
+    && add-apt-repository ppa:openrobotics/gazebo11-non-amd64 \
     && vcs import src < src/moveit_studio/moveit_studio.repos \
     && . /opt/ros/${ROS_DISTRO}/setup.sh \
     && rosdep update && apt update \
