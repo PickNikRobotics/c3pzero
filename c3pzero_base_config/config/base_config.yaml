@@ -1,0 +1,28 @@
+###############################################################
+#
+#  This configures the robot to work with moveit studio
+#
+###############################################################
+
+hardware:
+  # Used by the ur_description package to set kinematics and geometry for a specific robot type.
+  type: "c3pzero"
+  simulated: True
+
+  # The robot's IP address
+  ip: "!!! Please set the IP address of the robot"
+
+  # launch files
+  view_robot_base_launch_file:
+    package: "c3pzero_description"
+    path: "launch/view_robot_base.launch.py"
+
+  # Parameters used to configure the robot description through XACRO
+  robot_description:
+    urdf:
+      package: "c3pzero_description"
+      path: "urdf/c3pzero_base.xacro"
+
+ros_global_params:
+  use_sim_time: "%>> hardware.simulated"
+
