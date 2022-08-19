@@ -12,9 +12,33 @@ hardware:
   ip: "!!! Please set the IP address of the robot"
 
   # launch files
+  hardware_launch_file:
+    package: "c3pzero_base_config"
+    path: "launch/hardware.launch.py"
+
   robot_driver_persist_launch_file:
     package: "c3pzero_description"
     path: "launch/view_robot_base.launch.py"
+
+  robot_driver_persist_launch_file:
+    package: "c3pzero_description"
+    path: "launch/view_robot_base.launch.py"
+
+  simulated_hardware_launch_file:
+    package: "c3pzero_base_config"
+    path: "launch/hardware.launch.py"
+
+  simulated_robot_driver_persist_launch_file:
+    package: "c3pzero_description"
+    path: "launch/view_robot_base.launch.py"
+
+  simulated_robot_driver_persist_launch_file:
+    package: "c3pzero_description"
+    path: "launch/view_robot_base.launch.py"
+
+  camera_config_file:
+    package: "c3pzero_base_config"
+    path: "config/cameras.yaml"
 
   # Parameters used to configure the robot description through XACRO
   robot_description:
@@ -24,3 +48,45 @@ hardware:
 
 ros_global_params:
   use_sim_time: "%>> hardware.simulated"
+
+# This Configures moveit params that are in moveit_config.py
+moveit_params:
+  joint_group_name: "manipulator"
+
+  ompl_planning:
+    package: "c3pzero_base_config"
+    path: "config/moveit/ompl_planning.yaml"
+  kinematics:
+    package: "c3pzero_base_config"
+    path: "config/moveit/kinematics.yaml"
+  servo:
+    package: "c3pzero_base_config"
+    path: "config/moveit/kinova_gen3_servo.yaml"
+  sensors_3d:
+    package: "c3pzero_base_config"
+    path: "config/moveit/sensors_3d.yaml"
+
+  publish:
+    planning_scene: True
+    geometry_updates: True
+    state_updates: True
+    transforms_updates: True
+
+  trajectory_execution:
+    manage_controllers: True
+    allowed_execution_duration_scaling: 2.0
+    allowed_goal_duration_margin: 5.0
+    allowed_start_tolerance: 0.01
+
+objectives:
+  behavior_loader_plugins:
+    core:
+      - "moveit_studio::behaviors::CoreBehaviorsLoader"
+  objective_library_paths:
+    core:
+      package_name: "c3pzero_base_config"
+      relative_path: "objectives"
+  waypoints_file:
+    package_name: "c3pzero_base_config"
+    relative_path: "waypoints/waypoints.yaml"
+    
