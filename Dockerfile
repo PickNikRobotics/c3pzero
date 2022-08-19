@@ -96,6 +96,10 @@ RUN . /opt/upstream/install/setup.sh \
 
 RUN apt update && apt upgrade -y
 
+# install unlisted dependencies for c3pzero_driver
+RUN python3 -m pip install -U \
+    transforms3d
+
 # check that the repo builds and then clear it out
 RUN . /opt/upstream/install/setup.sh \
     && colcon build --mixin release lld \
