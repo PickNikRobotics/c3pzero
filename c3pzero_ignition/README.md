@@ -8,5 +8,5 @@ ros2 launch c3pzero_ignition ignition.launch.py world:=empty
 ```
 - spawn_robot.launch.py: Launches the c3pzero robot with all the sensors and controllers configured. Users need to launch a Ignition Gazebo (as in the previous command) instance to spawn the robot. To launch:
 ```
-ros2 launch c3pzero_ignition ignition.launch.py rviz:=true
+ros2 launch c3pzero_ignition spawn_robot.launch.py rviz:=true
 ```
