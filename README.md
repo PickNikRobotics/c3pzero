@@ -15,9 +15,14 @@ Build the repository in the container
 username@c3pzero_siteconfig-dev:~/ws$ colcon build
 ```
 
-Make sure to run these commands before trying to communicate with robot.
+The following ports are used to communicate with hardware
+- `/dev/ttyACM0` for motor driver
+- `/dev/ttyUSB0` for lidar
 
+Run these commands to allow the drivers to talk to the hardware
 ```
+sudo chmod 666 /dev/ttyACM0
+sudo chown $USER /dev/ttyACM0
 sudo chmod 666 /dev/ttyUSB0
 sudo chown $USER /dev/ttyUSB0
 sudo adduser $USER dialout
