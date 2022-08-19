@@ -25,4 +25,3 @@ hardware:
 
 ros_global_params:
   use_sim_time: "%>> hardware.simulated"
-

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.22)
-project(c3pzero_base_config NONE)
+project(c3pzero_hackathon_config NONE)
 
 find_package(ament_cmake REQUIRED)
 

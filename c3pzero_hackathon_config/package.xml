@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package format="3">
-  <name>c3pzero_base_config</name>
+  <name>c3pzero_hackathon_config</name>
   <version>0.1.0</version>
   <description>hackathon config for c3pzero</description>
   <maintainer email="abake48@gmail.com">Anthony Baker</maintainer>
