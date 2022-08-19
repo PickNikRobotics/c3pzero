@@ -47,30 +47,11 @@ COPY infrastructure/colcon-mixin /opt/colcon-mixin
 RUN colcon mixin add ${REPO} file:///opt/colcon-mixin/index.yaml \
     && colcon mixin update
 
-# build moveit_studio using it's upstream repos file
-WORKDIR /opt/internal
-RUN --mount=type=ssh \
-    mkdir src \
-    && git clone --single-branch --branch hackathon/remove-protobuf-requirement \
-        git@github.com:PickNikRobotics/moveit_studio.git src/moveit_studio \
-    && add-apt-repository ppa:openrobotics/gazebo11-non-amd64 \
-    && vcs import src < src/moveit_studio/moveit_studio.repos \
-    && . /opt/ros/${ROS_DISTRO}/setup.sh \
-    && rosdep update && apt update \
-    && touch src/realsense-ros/realsense2_camera/COLCON_IGNORE \
-    && rosdep install -q -y \
-        --from-paths src \
-        --ignore-src \
-        --rosdistro ${ROS_DISTRO} \
-    && rm -rf /var/lib/apt/lists/* \
-    && colcon build --mixin release lld
-
 # build source dependencies
 WORKDIR /opt/upstream
 COPY upstream.repos .
 
-RUN --mount=type=ssh \
-    mkdir src \
+RUN mkdir src \
     && vcs import src < upstream.repos \
     && . /opt/ros/${ROS_DISTRO}/setup.sh \
     && rosdep update && apt update \
