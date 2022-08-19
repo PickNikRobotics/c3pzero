@@ -19,7 +19,7 @@ services:
     environment:
       - DISPLAY=${DISPLAY}
       - QT_X11_NO_MITSHM=1
-      - ROS_DOMAIN_ID=0
+      - ROS_DOMAIN_ID=89
       - TERM=xterm-256color
     extra_hosts:
       - ${REPO}-dev:127.0.0.1
@@ -29,6 +29,7 @@ services:
     privileged: true
     user: ${UIDGID}
     volumes:
+      - /dev:/dev
       - ~/.ssh:${HOME}/.ssh:ro
       - ~/.gitconfig:${HOME}/.gitconfig:ro
       - ${PWD}:${HOME}/ws/src/${REPO}
