@@ -1,5 +1,11 @@
+# -*- coding: utf-8 -*-
 from launch import LaunchDescription
-from launch.actions import OpaqueFunction, DeclareLaunchArgument, TimerAction, IncludeLaunchDescription
+from launch.actions import (
+    OpaqueFunction,
+    DeclareLaunchArgument,
+    TimerAction,
+    IncludeLaunchDescription,
+)
 from launch.substitutions import LaunchConfiguration
 from ament_index_python.packages import get_package_share_directory
 from launch.launch_description_sources import PythonLaunchDescriptionSource
@@ -25,7 +31,7 @@ def launch_setup(context, *args, **kwargs):
         ignition_launch_py,
         launch_arguments={
             "world": world,
-        }.items()
+        }.items(),
     )
 
     # Spawn simulated robot in Ignition Gazebo
@@ -52,7 +58,6 @@ def launch_setup(context, *args, **kwargs):
     nav2_launch = IncludeLaunchDescription(
         nav2_launch_py,
     )
-
 
     nodes_and_launches = [
         ignition_launch,
