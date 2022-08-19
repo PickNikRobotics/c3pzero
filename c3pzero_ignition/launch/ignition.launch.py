@@ -45,6 +45,7 @@ def generate_launch_description():
         description="Name of world to display",
         choices=[
             "empty",
+            "simple"
         ],
         default_value="empty",
     )
