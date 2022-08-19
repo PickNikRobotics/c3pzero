@@ -20,7 +20,7 @@ hardware:
     package: "c3pzero_description"
     path: "launch/view_robot_base.launch.py"
 
-  robot_driver_persist_launch_file:
+  robot_driver_restart_launch_file:
     package: "c3pzero_description"
     path: "launch/view_robot_base.launch.py"
 
@@ -32,7 +32,7 @@ hardware:
     package: "c3pzero_description"
     path: "launch/view_robot_base.launch.py"
 
-  simulated_robot_driver_persist_launch_file:
+  simulated_robot_driver_restart_launch_file:
     package: "c3pzero_description"
     path: "launch/view_robot_base.launch.py"
 
@@ -89,4 +89,3 @@ objectives:
   waypoints_file:
     package_name: "c3pzero_base_config"
     relative_path: "waypoints/waypoints.yaml"
-
