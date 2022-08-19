@@ -14,7 +14,6 @@ services:
                       colcon mixin add default https://raw.githubusercontent.com/colcon/colcon-mixin-repository/master/index.yaml &&
                       colcon mixin add ${REPO} file:///opt/colcon-mixin/index.yaml &&
                       colcon mixin update &&
-                      export PATH="/usr/lib/ccache:$PATH" &&
                       bash"
     container_name: ${USER}-${REPO}-dev
     environment:
@@ -33,7 +32,6 @@ services:
       - ~/.ssh:${HOME}/.ssh:ro
       - ~/.gitconfig:${HOME}/.gitconfig:ro
       - ${PWD}:${HOME}/ws/src/${REPO}
-      - ~/.${REPO}/ccache:${HOME}/.ccache
       - /tmp/.X11-unix:/tmp/.X11-unix:ro
       - ${XDG_RUNTIME_DIR}:${XDG_RUNTIME_DIR}:ro
       - /etc/group:/etc/group:ro
