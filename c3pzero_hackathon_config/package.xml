@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>c3pzero_base_config</name>
+  <version>0.1.0</version>
+  <description>hackathon config for c3pzero</description>
+  <maintainer email="abake48@gmail.com">Anthony Baker</maintainer>
+  <license>Unlicense</license>
+  <url type="website">https://github.com/PickNikRobotics/c3pzero_siteconfig</url>
+  <url type="repository">https://github.com/PickNikRobotics/c3pzero_siteconfig</url>
+  <url type="bugtracker">https://github.com/PickNikRobotics/c3pzero_siteconfig/issues</url>
+  <author email="abake48@gmail.com">Anthony Baker</author>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <depend>c3pzero_base_config</depend>
+
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
