@@ -248,7 +248,7 @@
   <joint name="lidar_joint" type="fixed">
     <parent link="base_link"/>
     <child link="lidar_link"/>
-    <origin xyz="0 0 0.19" rpy="0 0 0"/>
+    <origin xyz="0 0 0.19" rpy="0 0 3.14156"/>
   </joint>
 
   <xacro:if value="$(arg simulation)">

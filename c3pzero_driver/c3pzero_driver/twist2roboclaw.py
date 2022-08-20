@@ -23,8 +23,10 @@ from tf2_ros import TransformBroadcaster
 
 from geometry_msgs.msg import TransformStamped
 from geometry_msgs.msg import Twist
-from sensor_msgs.msg import LaserScan
+from sensor_msgs.msg import LaserScan, JointState
 from nav_msgs.msg import Odometry
+
+from std_msgs.msg import Header
 
 import math
 
@@ -74,7 +76,7 @@ class RoboclawTwistSubscriber(Node):
         self.subscription  # prevent unused variable warning
         self.odom_publisher_ = self.create_publisher(Odometry, "c3pzero/odometry", 10)
         self.br = TransformBroadcaster(self)
-
+        self.joint_publisher_ = self.create_publisher(JointState, "joint_states", 10)
         try:
             self.rc = roboclaw_3.Roboclaw("/dev/ttyACM0", 115200)
         except:
@@ -165,6 +167,14 @@ class RoboclawTwistSubscriber(Node):
 
         # Send the transformation
         self.br.sendTransform(t)
+
+        wheel_state = JointState()
+        wheel_state.header.stamp = self.get_clock().now().to_msg()
+        wheel_state.name = ['drivewhl_r_joint', 'drivewhl_l_joint']
+        wheel_state.position = wheel_pos
+        wheel_state.velocity = wheel_speed
+        wheel_state.effort = []
+        self.joint_publisher_.publish(wheel_state)
 
     def mps_to_pps(self, wheel_speed):
         right_wheel_pluses = int(wheel_speed[0] / self.wheel_circumference * self.ppr)

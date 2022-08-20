@@ -9,8 +9,7 @@ services:
         REPO: ${REPO}
       context: .
       dockerfile: Dockerfile
-    command: bash -c "source /opt/internal/install/setup.sh &&
-                      source /opt/upstream/install/setup.sh &&
+    command: bash -c "source /opt/upstream/install/setup.sh &&
                       colcon mixin add default https://raw.githubusercontent.com/colcon/colcon-mixin-repository/master/index.yaml &&
                       colcon mixin add ${REPO} file:///opt/colcon-mixin/index.yaml &&
                       colcon mixin update &&
@@ -21,6 +20,10 @@ services:
       - QT_X11_NO_MITSHM=1
       - ROS_DOMAIN_ID=89
       - TERM=xterm-256color
+      - RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
+      - CYCLONEDDS_URI=${HOME}/ws/src/${REPO}/cyclonedds_localhost.xml
+      - CYCLONEDDS_NETWORK_INTERFACE=lo
+      - CYCLONEDDS_USE_MULTICAST=false
     extra_hosts:
       - ${REPO}-dev:127.0.0.1
     hostname: ${REPO}-dev

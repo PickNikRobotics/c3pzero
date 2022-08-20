@@ -40,7 +40,7 @@ class DiffDriveOdom:
             self._robot_pose[1] + delta_s * sin(self._robot_pose[2] + (theta / 2.0)),
             self._robot_pose[2] + theta,
         )
-        q = quaternion_from_euler(0.0, 0.0, self._robot_pose[2])
+        q = quaternion_from_euler(0.0, 0.0, -self._robot_pose[2])
 
         self._last_time = now
 
