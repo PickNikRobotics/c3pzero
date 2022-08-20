@@ -115,6 +115,8 @@ objectives:
   behavior_loader_plugins:
     core:
       - "moveit_studio::behaviors::CoreBehaviorsLoader"
+    nav:
+      - "c3pzero_behaviors::C3PzeroBehaviorsBehaviorsLoader"
   objective_library_paths:
     core:
       package_name: "c3pzero_base_config"

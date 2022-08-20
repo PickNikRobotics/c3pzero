@@ -1,0 +1,5 @@
+<library path="c3pzero_behaviors">
+  <class type="c3pzero_behaviors::C3PzeroBehaviorsBehaviorsLoader"
+         base_class_type="moveit_studio::behaviors::SharedResourcesNodeLoaderBase">
+  </class>
+</library>
