@@ -1,5 +1,5 @@
-# c3pzero_siteconfig
-MoveIt Studio Site Configuration for navigation with c3pzero mobile base
+# c3pzero
+Navigation with c3pzero mobile base
 
 # Build
 Build a new development image
