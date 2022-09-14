@@ -9,8 +9,7 @@ services:
         REPO: ${REPO}
       context: .
       dockerfile: Dockerfile
-    command: bash -c "source /opt/internal/install/setup.sh &&
-                      source /opt/upstream/install/setup.sh &&
+    command: bash -c "source /opt/upstream/install/setup.sh &&
                       colcon mixin add default https://raw.githubusercontent.com/colcon/colcon-mixin-repository/master/index.yaml &&
                       colcon mixin add ${REPO} file:///opt/colcon-mixin/index.yaml &&
                       colcon mixin update &&
