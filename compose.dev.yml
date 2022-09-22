@@ -20,6 +20,10 @@ services:
       - QT_X11_NO_MITSHM=1
       - ROS_DOMAIN_ID=89
       - TERM=xterm-256color
+      - RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
+      - CYCLONEDDS_URI=${HOME}/ws/src/${REPO}/cyclonedds_localhost.xml
+      - CYCLONEDDS_NETWORK_INTERFACE=lo
+      - CYCLONEDDS_USE_MULTICAST=false
     extra_hosts:
       - ${REPO}-dev:127.0.0.1
     hostname: ${REPO}-dev

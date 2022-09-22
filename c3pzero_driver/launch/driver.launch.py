@@ -14,6 +14,9 @@ def generate_launch_description():
                 package="c3pzero_driver",
                 executable="twist2roboclaw",
                 name="driver",
+                remappings={
+                    ("c3pzero/cmd_vel", "/cmd_vel")
+                },
             ),
         ]
     )

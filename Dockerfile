@@ -88,3 +88,7 @@ RUN . /opt/upstream/install/setup.sh \
 
 # chown working directory to user
 RUN mkdir -p /home/${USER}/ws && chown -R ${UIDGID} /home/${USER}
+
+RUN apt update \
+    && apt install -q -y --no-install-recommends \
+    ros-humble-rmw-cyclonedds-cpp
