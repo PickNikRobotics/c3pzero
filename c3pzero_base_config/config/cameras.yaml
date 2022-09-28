@@ -1,0 +1,14 @@
+- scene_camera:
+    camera_name: "scene_camera"
+    type: "realsense"
+    use: True
+    serial_no: "0"
+    device_type: "D415"
+    framerate: 6.0
+    image_width: 640
+    image_height: 480
+    enable_pointcloud: False
+
+    # information about the topics the camera publishes the raw image and info
+    rgb_info: "/scene_camera/color/camera_info"
+    rgb_image: "/scene_camera/color/image_raw"

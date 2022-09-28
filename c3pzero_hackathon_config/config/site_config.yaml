@@ -1,0 +1,9 @@
+#
+#  This contains information for a unique instance of a robot.
+#
+
+# Name of the package to specialize
+based_on_package: "c3pzero_base_config"
+
+hardware:
+  ip: 0.0.0.0
