@@ -5,7 +5,7 @@
   <version>0.0.0</version>
   <description>TODO: Package description</description>
   <maintainer email="marq.razz@gmail.com">Marq Rasmussen</maintainer>
-  <license>Unlicence</license>
+  <license>Unlicense</license>
 
   <exec_depend>geometry_msgs</exec_depend>
   <exec_depend>nav_msgs</exec_depend>
